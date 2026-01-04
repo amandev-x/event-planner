@@ -1,0 +1,31 @@
+from fastapi import APIRouter, HTTPException, status
+from models.users import User, UserSignin
+
+user_router = APIRouter(
+    tags = ["User"]
+)
+
+users = {}
+@user_router.post("/signup")
+async def sign_new_user(data: User):
+    if data.email in users:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="User with this email already exists."
+        )
+    users[data.email] = data 
+    return {"Message": "User created successfully."}
+
+@user_router.post("/signin")
+async def sign_user_in(user: UserSignin):
+    if users[user.email] not in users:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User does not exist"
+        )
+    if users[user.email].password != users.password:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Incorrect password or email."
+        )
+    return {"Message": "User signed in successfully."}
