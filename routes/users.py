@@ -17,7 +17,7 @@ async def sign_new_user(data: User):
     return {"Message": "User created successfully."}
 
 @user_router.post("/signin")
-async def sign_user_in(user: UserSignin):
+async def sign_user_in(user: UserSignIn):
     if users[user.email] not in users:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
