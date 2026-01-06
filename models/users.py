@@ -1,4 +1,4 @@
-from fastapi import BaseModel, EmailStr 
+from pydantic import BaseModel, EmailStr 
 from typing import Optional, List 
 from models import Event
 
