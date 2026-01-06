@@ -1,6 +1,6 @@
 from pydantic import BaseModel, EmailStr 
 from typing import Optional, List 
-from models import Event
+from models.events import Event
 
 class User(BaseModel):
     email: EmailStr
