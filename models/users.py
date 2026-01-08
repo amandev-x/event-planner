@@ -5,7 +5,7 @@ from models.events import Event
 class User(BaseModel):
     email: EmailStr
     password: str 
-    events: Optional[List[Event]]
+    events: Optional[List[Event]] = None
 
     class Config:
         json_schema_extra = {
