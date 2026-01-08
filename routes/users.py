@@ -18,12 +18,12 @@ async def sign_new_user(data: User):
 
 @user_router.post("/signin")
 async def sign_user_in(user: UserSignIn):
-    if users[user.email] not in users:
+    if user.email not in users:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User does not exist"
         )
-    if users[user.email].password != users.password:
+    if users[user.email].password != user.password:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Incorrect password or email."
