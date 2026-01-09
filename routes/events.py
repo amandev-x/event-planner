@@ -65,7 +65,7 @@ async def retrieve_event(id: int = Path(..., title="Event ID", gt=0, examples=1)
         if event["id"] == id:
             retrieve_event.append(event)
             return event
-    if not event:
+    if not retrieve_event:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Event with supplied ID {id} not found"
