@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Body, status, HTTPException
+from fastapi import APIRouter, Body, status, HTTPException, Path 
 from models.events import Event 
 from typing import List
 
@@ -57,3 +57,17 @@ async def retrieve_all_events():
         )
     else:
         return events
+    
+@event_router.get("/id", response_model=Event) 
+async def retrieve_event(id: int = Path(..., title="Event ID", gt=0, examples=1)):
+    retrieve_event = []
+    for event in events: 
+        if event["id"] == id:
+            retrieve_event.append(event)
+            return event
+    if not event:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Event with supplied ID {id} not found"
+        )
+    
