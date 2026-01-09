@@ -58,7 +58,7 @@ async def retrieve_all_events():
     else:
         return events
     
-@event_router.get("/id", response_model=Event) 
+@event_router.get("/{id}", response_model=Event) 
 async def retrieve_event(id: int = Path(..., title="Event ID", gt=0, examples=1)):
     retrieve_event = []
     for event in events: 
