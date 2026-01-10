@@ -81,7 +81,7 @@ async def create_new_event(body: Event = Body(...)):
 @event_router.delete("/{id}")
 async def delete_event_by_id(event_id: int = Path(..., title="ID of the event to delete", gt=0, examples=1)):
     for event in events:
-        if event.id == id:
+        if event.id == event_id:
             events.remove(event)
             return {
                 "Message": "Event deleted successfully."
