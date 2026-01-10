@@ -71,3 +71,11 @@ async def retrieve_event(id: int = Path(..., title="Event ID", gt=0, examples=1)
             detail=f"Event with supplied ID {id} not found"
         )
     
+@event_router.get("/new")
+async def create_new_event(body: Event = Body(...)):
+    events.append(body)
+    return {
+        "Message": "Event Created Successfully."
+    }
+
+    
