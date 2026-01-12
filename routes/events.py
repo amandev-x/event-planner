@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Body, status, HTTPException, Path 
-from models.events import Event 
+from models.events import Event, EventCreate
 from typing import List
 
 event_router = APIRouter(
@@ -72,7 +72,7 @@ async def retrieve_event(id: int = Path(..., title="Event ID", gt=0, examples=1)
         )
     
 @event_router.post("/new")
-async def create_new_event(body: Event = Body(...)):
+async def create_new_event(body: EventCreate = Body(...)):
     events.append(body)
     return {
         "Message": "Event Created Successfully."
